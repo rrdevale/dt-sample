@@ -13,13 +13,13 @@
       copy: src=/root/dt-sample/create.sh dest=/var/tmp/create.sh mode=0755
 
     - name: Execcution of script on remote server
-      script: /var/tmp/create.sh <service_name>
+      script: /var/tmp/create.sh testsv
 
     - pause:
         seconds: 3
 
     - name: Check whether test service is started or not 
-      shell: svstat /etc/sv/<service_name>
+      shell: svstat /etc/sv/testsv
       register: sv_out
 
     - debug:
