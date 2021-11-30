@@ -1,0 +1,26 @@
+---
+- hosts: local
+  name: Now we are installing daemontools and configuring simple service
+
+  tasks:
+    - name: Now we are installing daemontools
+      apt: name=daemontools,daemontools-run state=present
+
+    - name: Check whether daemontools is running
+      service: name=daemontools state=started
+
+    - name: Transfering the script to remote server
+      copy: src=/root/dt-sample/create.sh dest=/var/tmp/create.sh mode=0755
+
+    - name: Execcution of script on remote server
+      script: /var/tmp/create.sh <service_name>
+
+    - pause:
+        seconds: 3
+
+    - name: Check whether test service is started or not 
+      shell: svstat /etc/sv/<service_name>
+      register: sv_out
+
+    - debug:
+        msg: "{{ sv_out.stdout }}"
