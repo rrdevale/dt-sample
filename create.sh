@@ -25,4 +25,4 @@ chmod 755 /etc/sv/$1/log/run
 chmod 755 /root/app.sh
 
 echo "Check if symlink exists or not"
-if [ -L "/etc/service/$1" ] ; then echo "Softlink already exists...quitting" ; else ln -s /etc/sv/$1  /etc/service/$1 ; fi
+if [ -L "/etc/service/$1" ] ; then echo "Softlink already exists...exiting" ; else ln -s /etc/sv/$1  /etc/service/$1 ; fi
